@@ -25,4 +25,6 @@ class Person
 end
 
 person = Person.new("Rida", 22,)
-puts(person.can_use_survive)
+puts(person.name)
+person.name = "Ali"
+puts(person.name)
