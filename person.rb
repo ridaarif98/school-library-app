@@ -13,7 +13,7 @@ class Person
   end
 
   def validate_name
-    @corrector.correct_name(@name)
+   @name = @corrector.correct_name(@name)
   end
 
   def can_use_services?
@@ -26,7 +26,3 @@ class Person
     @age >= 18
   end
 end
-
-person = Person.new(40, "amtal")
-puts(person.can_use_services?)
-puts(person.validate_name)
