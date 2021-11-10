@@ -13,11 +13,11 @@ class Rental
 
   def book=(book)
     @book = book
-    book.rentals = self
+    book.add_rental(self)
   end
 
   def book=(person)
     @person = person
-    person.rentals = self
+    person.add_rental(self)
   end
 end
