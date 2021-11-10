@@ -12,7 +12,7 @@ class Person
     @corrector = Corrector.new
   end
 
-  def validate_name
+  def validate_name(_name)
     @name = @corrector.correct_name(@name)
   end
 
