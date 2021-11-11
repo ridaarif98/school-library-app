@@ -1,5 +1,5 @@
 require './book'
-# require './person'
+require './person.rb'
 # require './student'
 # require './teacher'
 
@@ -8,6 +8,24 @@ class CreateBooks
 
   def initialize
     @books = []
+    @persons = []
+  end
+
+  def handle_person
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Parent permission: '
+    parent_permission = gets.chomp
+    @persons.push(Person.new(age: age, name: name, parent_permission: parent_permission))
+    puts('Person added successfully!')
+    run
+  end
+
+  def display_person
+    @persons.each { |person| puts "Age: '#{person.age}', Name: '#{person.name}'" }
+    run
   end
 
   def handle_book
@@ -38,8 +56,10 @@ class CreateBooks
     when 2
       # display_books
       print 'List of all People:'
+      display_person
     when 3
       puts 'Create a Person'
+      handle_person
     when 4
       puts 'Create a book'
       handle_book
