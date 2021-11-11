@@ -2,6 +2,7 @@ require './book'
 require './person.rb'
 require './student'
 require './teacher'
+require './rental.rb'
 
 class CreateBooks
   attr_accessor :book
@@ -9,6 +10,7 @@ class CreateBooks
   def initialize
     @books = []
     @persons = []
+    @rentals = []
   end
 
   def create_teacher
@@ -47,6 +49,7 @@ class CreateBooks
 
   def display_person
     @persons.each { |person| puts "[#{person.class.name.split('::').last}] Name: '#{person.name}', ID: #{person.id}, Age: '#{person.age}'," }
+    puts
     run
   end
 
@@ -65,6 +68,26 @@ class CreateBooks
     run
   end
 
+  def create_rental
+    print 'Select a book from the following list: '
+    @books.each_with_index {|book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}"}
+    select_book = gets.chomp.to_i
+    book = @books[select_book]
+
+    print 'Select a person from the following list: '
+    @persons.each_with_index {|person, index| puts "#{index}) [#{person.class.name.split('::').last}], Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"}
+    select_person = gets.chomp.to_i
+    person = @persons[select_person]
+
+    print 'Date: '
+    date = gets.chomp
+
+    @rentals.push(Rental.new(date: date, person: person, book: book))
+    puts 'Rental created successfully'
+    puts
+    run
+  end
+
   def run
     puts 'Please Choose an option by entrin a number:'
     choose_options = ['1- List all book', '2- List all People', '3- Create a Person', '4- Create a Book', '5- Create a Rental', '6- List all Rentals for given id','7- Exit']
@@ -73,11 +96,10 @@ class CreateBooks
     case options
     when 1
       # handle_book
-      print 'All books are:'
+      puts 'All books are:'
       display_books
     when 2
-      # display_books
-      print 'List of all People:'
+      puts 'List of all People:'
       display_person
     when 3
       puts 'Create a Person'
@@ -86,7 +108,7 @@ class CreateBooks
       puts 'Create a book'
       handle_book
     when 5
-      puts 'Create a rental'
+      create_rental
     when 6
       puts 'List all rentals for given id'
     when 7
