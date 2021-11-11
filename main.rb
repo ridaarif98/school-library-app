@@ -11,15 +11,27 @@ class CreateBooks
     @persons = []
   end
 
-  def handle_person
+  def create_teacher
     print 'Age: '
     age = gets.chomp
     print 'Name: '
     name = gets.chomp
-    print 'Parent permission: '
-    parent_permission = gets.chomp
-    @persons.push(Person.new(age: age, name: name, parent_permission: parent_permission))
+    print 'Specialization: '
+    specialization = gets.chomp
+    @persons.push(Teacher.new(age: age, specialization: specialization,  name: name))
+  end
+
+  def handle_person
+    print 'Do you want to create a student(1) or a teacher(2)? [Input the number]: '
+    choice = gets.chomp.to_i
+    case choice
+    when 1
+        create_student
+    when 2
+        create_teacher
+    end
     puts('Person added successfully!')
+    puts
     run
   end
 
