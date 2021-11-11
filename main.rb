@@ -1,7 +1,7 @@
 require './book'
 require './person.rb'
-# require './student'
-# require './teacher'
+require './student'
+require './teacher'
 
 class CreateBooks
   attr_accessor :book
@@ -21,6 +21,16 @@ class CreateBooks
     @persons.push(Teacher.new(age: age, specialization: specialization,  name: name))
   end
 
+  def create_student
+    print 'Age: '
+    age = gets.chomp
+    print 'Name: '
+    name = gets.chomp
+    print 'Has parents permission? [Y/N]:  '
+    parent_permission = gets.chomp != 'n'
+    @persons.push(Student.new(age: age, classroom: 'Coding Class',  name: name, parent_permission:parent_permission))
+  end
+
   def handle_person
     print 'Do you want to create a student(1) or a teacher(2)? [Input the number]: '
     choice = gets.chomp.to_i
@@ -36,7 +46,7 @@ class CreateBooks
   end
 
   def display_person
-    @persons.each { |person| puts "Age: '#{person.age}', Name: '#{person.name}'" }
+    @persons.each { |person| puts "[#{person.class.name.split('::').last}] Name: '#{person.name}', ID: #{person.id}, Age: '#{person.age}'," }
     run
   end
 
