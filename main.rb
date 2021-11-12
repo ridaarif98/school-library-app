@@ -21,6 +21,9 @@ class CreateBooks
     print 'Specialization: '
     specialization = gets.chomp
     @persons.push(Teacher.new(age: age, specialization: specialization,  name: name))
+    puts('Person added successfully!')
+    puts
+    run
   end
 
   def create_student
@@ -31,6 +34,9 @@ class CreateBooks
     print 'Has parents permission? [Y/N]:  '
     parent_permission = gets.chomp != 'n'
     @persons.push(Student.new(age: age, classroom: 'Coding Class',  name: name, parent_permission:parent_permission))
+    puts('Person added successfully!')
+    puts
+    run
   end
 
   def handle_person
@@ -42,12 +48,13 @@ class CreateBooks
     when 2
         create_teacher
     end
-    puts('Person added successfully!')
+    # puts('Person added successfully!')
     puts
     run
   end
 
   def display_person
+    puts 'All persons are: '
     @persons.each { |person| puts "[#{person.class.name.split('::').last}] Name: '#{person.name}', ID: #{person.id}, Age: '#{person.age}'," }
     puts
     run
@@ -60,21 +67,24 @@ class CreateBooks
     author = gets.chomp
     @books.push(Book.new(title: title, author: author))
     puts 'Book created'
+    puts
     run
   end
 
   def display_books
+    puts 'All books are: '
     @books.each { |book| puts "Title: '#{book.title}', Author: #{book.author}" }
+    puts
     run
   end
 
   def create_rental
-    print 'Select a book from the following list: '
+    puts 'Select a book from the following list: '
     @books.each_with_index {|book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}"}
     select_book = gets.chomp.to_i
     book = @books[select_book]
 
-    print 'Select a person from the following list: '
+    puts 'Select a person from the following list: '
     @persons.each_with_index {|person, index| puts "#{index}) [#{person.class.name.split('::').last}], Name: #{person.name}, ID: #{person.id}, Age: #{person.age}"}
     select_person = gets.chomp.to_i
     person = @persons[select_person]
@@ -88,6 +98,18 @@ class CreateBooks
     run
   end
 
+  def display_rental
+    print 'ID of person: '
+    id = gets.chomp.to_i
+    puts 'Rentals: '
+    selected_rentals = @rentals.select{|rental| rental.person.id == id}
+    selected_rentals.each do |s_rental|
+      puts "Date: #{s_rental.date}, Book: #{s_rental.book.title} by #{s_rental.book.author}"
+    end
+    puts
+    run
+  end
+
   def run
     puts 'Please Choose an option by entrin a number:'
     choose_options = ['1- List all book', '2- List all People', '3- Create a Person', '4- Create a Book', '5- Create a Rental', '6- List all Rentals for given id','7- Exit']
@@ -95,11 +117,8 @@ class CreateBooks
     options = gets.chomp.to_i
     case options
     when 1
-      # handle_book
-      puts 'All books are:'
       display_books
     when 2
-      puts 'List of all People:'
       display_person
     when 3
       puts 'Create a Person'
@@ -110,7 +129,7 @@ class CreateBooks
     when 5
       create_rental
     when 6
-      puts 'List all rentals for given id'
+     display_rental
     when 7
       puts 'Thanks for using this app!'
     end
@@ -118,6 +137,7 @@ class CreateBooks
 end
 
 def main
+  puts 'Welcome to School Library App!'
   puts
   test = CreateBooks.new
   test.run
