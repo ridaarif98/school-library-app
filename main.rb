@@ -1,10 +1,12 @@
 require_relative 'refactor'
 require_relative 'handleperson'
+require_relative 'handlebook'
 
 class Menu
   def initialize
     @create = CreateBooks.new
     @person = HandlePerson.new
+    @book = HandleBooks.new
   end
 
   def choice_selection
@@ -24,7 +26,7 @@ class Menu
     options = gets.chomp.to_i
     case options
     when 1
-      @create.display_books
+      @book.display_books
       menu
     when 2
       @person.display_person
@@ -35,7 +37,7 @@ class Menu
       menu
     when 4
       puts 'Create a book'
-      @create.handle_book
+      @book.create_book
       menu
     when 5
       @create.create_rental
