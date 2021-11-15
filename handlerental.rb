@@ -1,14 +1,20 @@
-require './rental'
+require 'pry'
+require_relative 'rental'
+require_relative 'handlebook'
+require_relative 'handleperson'
 
-class CreateBooks
-    attr_accessor :book
+class HandleRentals
+    attr_accessor :rentals
 
-    def initialize
-      @rentals = []
+    def initialize(params)
+      @rentals = params[:rentals]
+      @books = params[:books]
+      @persons = params[:persons]
     end
 
     def create_rental
       puts 'Select a book from the following list: '
+
       @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
       select_book = gets.chomp.to_i
       book = @books[select_book]

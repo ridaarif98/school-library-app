@@ -3,9 +3,8 @@ require './student'
 require './teacher'
 
 class HandlePerson
-
-def initialize
-    @persons = []
+def initialize(arg)
+    @persons = arg
 end
 
 def create_teacher

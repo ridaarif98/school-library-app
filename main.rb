@@ -1,16 +1,21 @@
-require_relative 'refactor'
+require_relative 'handlerental'
 require_relative 'handleperson'
 require_relative 'handlebook'
 
 class Menu
+  attr_accessor :persons, :books
+
   def initialize
-    @create = CreateBooks.new
-    @person = HandlePerson.new
-    @book = HandleBooks.new
+    @persons = []
+    @books = []
+    @rentals = []
+    @rental = HandleRentals.new({ rentals: @rentals, persons: @persons, books: @books })
+    @person = HandlePerson.new(@persons)
+    @book = HandleBooks.new(@books)
   end
 
   def choice_selection
-    puts 'Please Choose an option by entrin a number:'
+    puts 'Please choose an option by entering a number:'
     choose_options = %(1- List all book
       2- List all People
       3- Create a Person
@@ -40,10 +45,10 @@ class Menu
       @book.create_book
       menu
     when 5
-      @create.create_rental
+      @rental.create_rental
       menu
     when 6
-      @create.display_rental
+      @rental.display_rental
       menu
     else
       puts 'Thanks for using this app!'

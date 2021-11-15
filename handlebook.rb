@@ -1,9 +1,7 @@
 require './book'
 class HandleBooks
-    attr_accessor :book
-
-    def initialize
-      @books = []
+    def initialize(arg)
+      @books = arg
     end
 
     def create_book
