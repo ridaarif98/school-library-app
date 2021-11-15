@@ -1,8 +1,10 @@
 require_relative 'refactor'
+require_relative 'handleperson'
 
 class Menu
   def initialize
     @create = CreateBooks.new
+    @person = HandlePerson.new
   end
 
   def choice_selection
@@ -25,11 +27,11 @@ class Menu
       @create.display_books
       menu
     when 2
-      @create.display_person
+      @person.display_person
       menu
     when 3
       puts 'Create a Person'
-      @create.handle_person
+      @person.handle_person
       menu
     when 4
       puts 'Create a book'
