@@ -8,10 +8,7 @@ class HandlePerson
   end
 
   def create_teacher
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
+    name, age = name_and_age
     print 'Specialization: '
     specialization = gets.chomp
     @persons.push(Teacher.new(age: age, specialization: specialization, name: name))
@@ -19,10 +16,7 @@ class HandlePerson
   end
 
   def create_student
-    print 'Age: '
-    age = gets.chomp.to_i
-    print 'Name: '
-    name = gets.chomp
+    name, age = name_and_age
     print 'Has parents permission? [Y/N]:  '
     parent_permission = gets.chomp != 'n'
     @persons.push(Student.new(age: age, classroom: 'Coding Class', name: name, parent_permission: parent_permission))
@@ -46,4 +40,15 @@ class HandlePerson
       puts "[#{person.class.name.split('::').last}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age},"
     end
   end
+
+  def name_and_age
+    print 'Age: '
+    age = gets.chomp.to_i
+    print 'Name: '
+    name = gets.chomp
+
+    [name, age]
+  end
+
+  private(:create_student, :create_teacher, :name_and_age)
 end
