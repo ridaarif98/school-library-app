@@ -3,11 +3,11 @@ require './student'
 require './teacher'
 
 class HandlePerson
-def initialize(arg)
+  def initialize(arg)
     @persons = arg
-end
+  end
 
-def create_teacher
+  def create_teacher
     print 'Age: '
     age = gets.chomp.to_i
     print 'Name: '
@@ -16,9 +16,9 @@ def create_teacher
     specialization = gets.chomp
     @persons.push(Teacher.new(age: age, specialization: specialization, name: name))
     puts('Person added successfully!')
-end
+  end
 
-def create_student
+  def create_student
     print 'Age: '
     age = gets.chomp.to_i
     print 'Name: '
@@ -27,23 +27,23 @@ def create_student
     parent_permission = gets.chomp != 'n'
     @persons.push(Student.new(age: age, classroom: 'Coding Class', name: name, parent_permission: parent_permission))
     puts('Person added successfully!')
-end
+  end
 
-def handle_person
+  def handle_person
     print 'Do you want to create a student(1) or a teacher(2)? [Input the number]: '
     choice = gets.chomp.to_i
     case choice
     when 1
-    create_student
+      create_student
     when 2
-    create_teacher
+      create_teacher
     end
-end
+  end
 
-def display_person
+  def display_person
     puts 'All persons are: '
     @persons.each do |person|
-    puts "[#{person.class.name.split('::').last}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age},"
+      puts "[#{person.class.name.split('::').last}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age},"
     end
-end
+  end
 end
