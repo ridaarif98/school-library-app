@@ -9,9 +9,9 @@ class Menu
 
   def initialize
     @storage = Storage.new
-    @persons = @storage.parse['persons']
-    @books = @storage.parse['books']
-    @rentals = []
+    @persons = @storage.parse[:persons]
+    @books = @storage.parse[:books]
+    @rentals = @storage.parse[:rentals]
     @rental = HandleRentals.new({ rentals: @rentals, persons: @persons, books: @books })
     @person = HandlePerson.new(@persons)
     @book = HandleBooks.new(@books)
@@ -36,26 +36,32 @@ class Menu
     case options
     when 1
       @book.display_books
+      sleep 1
       menu
     when 2
       @person.display_person
+      sleep 1
       menu
     when 3
       puts 'Create a Person'
       @person.handle_person
+      sleep 1
       menu
     when 4
       puts 'Create a book'
       @book.create_book
+      sleep 1
       menu
     when 5
       @rental.create_rental
+      sleep 1
       menu
     when 6
       @rental.display_rental
+      sleep 1
       menu
     else
-      puts 'Thanks for using this app!' 
+      puts 'Thanks for using this app!'
       @storage.stringify_data(@persons, @books, @rentals)
     end
   end
