@@ -9,8 +9,8 @@ class Menu
 
   def initialize
     @storage = Storage.new
-    @persons = []
-    @books = []
+    @persons = @storage.parse['persons']
+    @books = @storage.parse['books']
     @rentals = []
     @rental = HandleRentals.new({ rentals: @rentals, persons: @persons, books: @books })
     @person = HandlePerson.new(@persons)
@@ -55,7 +55,7 @@ class Menu
       @rental.display_rental
       menu
     else
-      puts 'Thanks for using this app!'
+      puts 'Thanks for using this app!' 
       @storage.stringify_data(@persons, @books, @rentals)
     end
   end
