@@ -7,9 +7,9 @@ require_relative 'rental'
 
 class Storage
   def stringify_data(person, book, rental)
-    File.open('books.json', 'w') {|f| f.write JSON.generate(book)}
-    File.open('persons.json', 'w') {|f| f.write JSON.generate(person)}
-    File.open('rentals.json', 'w') {|f| f.write JSON.generate(rental)}
+    File.open('books.json', 'w') { |f| f.write JSON.generate(book) }
+    File.open('persons.json', 'w') { |f| f.write JSON.generate(person) }
+    File.open('rentals.json', 'w') { |f| f.write JSON.generate(rental) }
   end
 
   def parse
@@ -37,7 +37,7 @@ class Storage
 
     if File.exist? file
       JSON.parse(File.read(file)).map do |person|
-        if person['json_class'].eql? ('Teacher')
+        if person['json_class'].eql?('Teacher')
           parse_teacher(person)
         else
           parse_student(person)
@@ -49,18 +49,18 @@ class Storage
   end
 
   def parse_teacher(person)
-   teacher =  Teacher.new(age: person['age'].to_i,
-          name: person['name'],
-          specialization: person['specialization'])
+    teacher = Teacher.new(age: person['age'].to_i,
+                          name: person['name'],
+                          specialization: person['specialization'])
     teacher.id = person['id']
     teacher
   end
 
   def parse_student(person)
-   student =  Student.new(age: person['age'].to_i,
-          name: person['name'],
-          classroom: person['classroom'],
-          parent_permission: person['parent_permission'])
+    student = Student.new(age: person['age'].to_i,
+                          name: person['name'],
+                          classroom: person['classroom'],
+                          parent_permission: person['parent_permission'])
     student.id = person['id']
     student
   end
@@ -68,26 +68,15 @@ class Storage
   def parse_rental(persons, books)
     file = 'rentals.json'
 
-    if File.exists? file
+    if File.exist? file
       JSON.parse(File.read(file)).map do |rental|
         person = persons.detect { |p| p.id.eql?(rental['person']['id']) }
-      book = books.detect { |b| b.title.eql?(rental['book']['title']) }
-      # Rental.new({ date: rental['date'], book: book, person: person })
-      Rental.new(rental['date'], person, book)
+        book = books.detect { |b| b.title.eql?(rental['book']['title']) }
+        # Rental.new({ date: rental['date'], book: book, person: person })
+        Rental.new(rental['date'], person, book)
       end
-      else
-        []
+    else
+      []
     end
   end
-
-  # def parse_rental(persons, books)
-  #   file = 'rentals.json'
-  #   return [] unless File.exist? file
-
-  #   JSON.parse(File.read(file)).map do |rental|
-  #     book = books.detect { |b| b.title.eql?(rental['book']['title']) }
-  #     person = persons.detect { |p| p.id.eql?(rental['person']['id']) }
-  #     Rental.new(rental['date'], person, book)
-  #   end
-  # end1
 end
