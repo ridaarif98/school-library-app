@@ -19,6 +19,8 @@ To get a local copy up and running follow these simple example steps.
 
 - ```cd school-library-app```
 
+### Running The App
+Run ```ruby main.rb``` to run the console app.
 ## Authors
 
 👤 **Rida Arif**
