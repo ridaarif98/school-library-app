@@ -1,12 +1,14 @@
 require_relative 'handlerental'
 require_relative 'handleperson'
 require_relative 'handlebook'
+require_relative 'preserve_data'
 # rubocop:disable Metrics
 
 class Menu
   attr_accessor :persons, :books
 
   def initialize
+    @storage = Storage.new
     @persons = []
     @books = []
     @rentals = []
@@ -54,6 +56,7 @@ class Menu
       menu
     else
       puts 'Thanks for using this app!'
+      @storage.stringify_data(@persons, @books, @rentals)
     end
   end
 end
