@@ -23,13 +23,13 @@ class Person
     of_age || @parent_permission
   end
 
+  def add_rental(rental)
+    @rentals << rental
+  end
+
   private
 
   def of_age
     @age >= 18
-  end
-
-  def add_rental(rental)
-    @rentals << rental
   end
 end

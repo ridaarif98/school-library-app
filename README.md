@@ -10,6 +10,7 @@
 ## Built With
 - Ruby
 - Rubocop
+- Rspec(For Testing)
 
 ## Getting Started
 To get a local copy up and running follow these simple example steps.
@@ -21,6 +22,14 @@ To get a local copy up and running follow these simple example steps.
 
 ### Running The App
 Run ```ruby main.rb``` to run the console app.
+
+### Testing
+
+Run ```gem install rspec``` to install Rspec,
+
+Run ```rspec spec``` to run all the test cases, and
+
+Run ```rspec spec/name_of_test_file.rb``` to run test cases individually.
 ## Authors
 
 👤 **Rida Arif**
